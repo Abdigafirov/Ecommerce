@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+
+{% block content%}
+{% if  user.is_superuser %}
+<form  method="GET"> {% csrf_token %}       
+    <img src="{{product_detail.rasmi.url}}" alt="rasm" style="max-height:300px "  style="max-width:300px ">
+     <p>{{product_detail.name}}</p>
+     <p>{{product_detail.narxi}}</p>
+    <br>
+    <label for="inputname">  nechta olasz:  </label>
+    <input type="number" name="inputname" id="">
+    <input type="submit" value="Savatga qo'shish"/><br>
+    </form><br>
+    <h5><a href="{% url 'edit' product_detail.pk %}">Edit</a></h5>
+    <h5><a href="{% url 'delete' product_detail.pk %}">Delete</a></h5>
+    <br><br>
+
+
+{% elif user.is_authenticated %}
+     
+        <form action="" method="POST"> {% csrf_token %}       
+            <img src="{{product_detail.rasmi.url}}" alt="rasm" style="max-height:300px "  style="max-width:300px ">
+             <p>{{product_detail.name}}</p>
+            <p>{{product_detail.narxi}}</p>
+            <br>
+            <label for="inputname">  nechta olasz:  </label>
+            <input type="number" name="inputname" >
+            <input type="submit" value="Savatga qo'shish"/>
+            <br><br>
+        </form>
+
+{%else %}
+{% endif %}
+
+{% endblock%}

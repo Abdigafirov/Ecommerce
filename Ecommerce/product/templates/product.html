@@ -1,0 +1,18 @@
+{% extends 'index.html'%}
+
+{% block content %}
+                 <form method="get">{% csrf_token %}
+                     {% for product in product%}
+                       <li>{{product.name}}</li>
+                       <li>{{product.narxi}}</li>
+                       <li>{{product.category}}</li>
+                       <img src="{{ product.rasmi.url }}" alt="">
+                      <input type="submit" value="Savatga qo'shish"/><br>
+                       {% if task.author == user or user.is_superuser %}
+                       <a href="{% url 'product_edit' product.pk  %}"> Edit product </a>
+                       <a href="{% url 'product_delete' product.pk  %}"> Delete product </a>
+                       {% endif %}
+                     {% endfor%}
+                 </form>
+
+{% endblock %}
